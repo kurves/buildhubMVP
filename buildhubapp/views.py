@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'buildhubapp/home.html')
+    return render(request, 'buildhubapp/indexxcc.html')
     #projects = Project.objects.all()
     #messages = Message.objects.all()
     #user = request.user
