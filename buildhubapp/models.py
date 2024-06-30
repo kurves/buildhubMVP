@@ -12,3 +12,7 @@ class Message(models.Model):
     subject = models.CharField(max_length=200)
     body = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
