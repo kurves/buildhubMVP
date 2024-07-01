@@ -12,6 +12,18 @@ def home(request):
     return render(request, 'main/home.html', context)
 
 
+@login_required
+def post_project(request):
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ProjectForm()
+    return render(request, 'main/post_project.html', {'form': form})
+
+
 """def home(request):
     return render(request, 'buildhubapp/indexxcc.html')
     #projects = Project.objects.all()
