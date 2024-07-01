@@ -1,0 +1,11 @@
+{% extends "main/home.html" %}
+{% block content %}
+<section id="post-project" class="mt-5">
+    <h2>Post a New Project</h2>
+    <form method="POST" action="{% url 'post_project' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Post Project</button>
+    </form>
+</section>
+{% endblock %}
