@@ -23,6 +23,18 @@ def post_project(request):
         form = ProjectForm()
     return render(request, 'main/post_project.html', {'form': form})
 
+@login_required
+def update_profile(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = UserProfileForm(instance=user_profile)
+    return render(request, 'main/update_profile.html', {'form': form})
+
 
 """def home(request):
     return render(request, 'buildhubapp/indexxcc.html')
