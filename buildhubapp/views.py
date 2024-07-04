@@ -1,18 +1,17 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Project, Message, UserProfile
 from .forms import ProjectForm, UserProfileForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Project, Message
+from .models import Project, Message, Client, Professional
 from .forms import ProjectForm, MessageForm
 
 
 def home(request):
     projects = Project.objects.all()
     messages = Message.objects.filter(recipient=request.user) if request.user.is_authenticated else []
-    user_profile = UserProfile.objects.get(user=request.user) if request.user.is_authenticated else None
+    user_profile = Client.objects.get(user=request.user) if request.user.is_authenticated else None
     context = {'projects': projects, 'messages': messages, 'user': request.user, 'user_profile': user_profile}
     return render(request, 'main/home.html', context)
 

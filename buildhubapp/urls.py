@@ -1,12 +1,5 @@
 from django.urls import path
 from . import views
-from .views import home, post_project, update_profile
-
-urlpatterns = [
-    path('', home, name='home'),
-    path('post_project/', post_project, name='post_project'),
-    path('update_profile/', update_profile, name='update_profile'),
-]
 
 
 urlpatterns = [

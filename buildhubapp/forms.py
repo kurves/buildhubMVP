@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, UserProfile
+
 from .models import Project, Message
 
 class ProjectForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class ProjectForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Client
         fields = ['bio']
 
 class MessageForm(forms.ModelForm):
