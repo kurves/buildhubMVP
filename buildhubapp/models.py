@@ -1,13 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Project(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+
+
+
+class Professional(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=15)
+    profession = models.CharField(max_length=100)
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
 
     def __str__(self):
-        return self.title
+        return self.user.username
 
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
@@ -19,9 +23,23 @@ class Message(models.Model):
     def __str__(self):
         return self.subject
 
-class UserProfile(models.Model):
+
+class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
+    phone = models.CharField(max_length=15)
+    address = models.TextField()
 
     def __str__(self):
         return self.user.username
+
+
+
+class Project(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    professional = models.ForeignKey(Professional, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('In Progress', 'In Progress'), ('Completed', 'Completed')], default='Pending')
+
+    def __str__(self):
+        return self.title
