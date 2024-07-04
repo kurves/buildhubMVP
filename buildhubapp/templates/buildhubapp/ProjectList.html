@@ -1,0 +1,11 @@
+<!-- hub/templates/hub/project_list.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Projects</h1>
+  <ul>
+    {% for project in projects %}
+      <li><a href="{% url 'hub:project_detail' project.pk %}">{{ project.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

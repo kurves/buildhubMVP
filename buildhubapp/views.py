@@ -3,6 +3,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Project, Message, UserProfile
 from .forms import ProjectForm, UserProfileForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Project, Message
+from .forms import ProjectForm, MessageForm
+
 
 def home(request):
     projects = Project.objects.all()
@@ -11,6 +16,10 @@ def home(request):
     context = {'projects': projects, 'messages': messages, 'user': request.user, 'user_profile': user_profile}
     return render(request, 'main/home.html', context)
 
+@login_required
+def project_detail(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    return render(request, 'hub/project_detail.html', {'project': project})
 
 @login_required
 def post_project(request):
@@ -36,6 +45,26 @@ def update_profile(request):
     return render(request, 'main/update_profile.html', {'form': form})
 
 
+@login_required
+def send_message(request, recipient_id):
+    recipient = get_object_or_404(User, pk=recipient_id)
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.recipient = recipient
+            message.save()
+            return redirect('hub:message_list')
+    else:
+        form = MessageForm()
+    return render(request, 'hub/send_message.html', {'form': form, 'recipient': recipient})
+
+@login_required
+def message_list(request):
+    messages_sent = Message.objects.filter(sender=request.user)
+    messages_received = Message.objects.filter(recipient=request.user)
+    return render(request, 'hub/message_list.html', {'messages_sent': messages_sent, 'messages_received': messages_received})
 """def home(request):
     return render(request, 'buildhubapp/indexxcc.html')
     #projects = Project.objects.all()
