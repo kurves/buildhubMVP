@@ -44,6 +44,12 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
 ]
+AUTH_USER_MODEL = 'core.User'
+
+SITE_ID = 1
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
