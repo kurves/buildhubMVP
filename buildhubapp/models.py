@@ -40,11 +40,13 @@ class Client(models.Model):
 
 
 class Project(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    user= models.ForeignKey(User, on_delete=models.CASCADE)
     professional = models.ForeignKey(Professional, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
+    photos = models.ImageField(upload_to='project_photos/', blank=True, null=True)
     status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('In Progress', 'In Progress'), ('Completed', 'Completed')], default='Pending')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
