@@ -17,12 +17,6 @@ class Message(models.Model):
         return self.subject
 
 
-class Client(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=15)
-    address = models.TextField()
-
-
 class Project(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
