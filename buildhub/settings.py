@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
 ]
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'buildhubapp.User'
 
 SITE_ID = 1
 
