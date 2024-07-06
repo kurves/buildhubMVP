@@ -7,17 +7,6 @@ class User(AbstractUser):
     profile_photo = models.ImageField(upload_to='profile_photos/', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
-
-
-class Professional(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=15)
-    profession = models.CharField(max_length=100)
-    rating = models.DecimalField(max_digits=2, decimal_places=1, default=0.0)
-
-    def __str__(self):
-        return self.user.username
-
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
