@@ -12,7 +12,19 @@ from django.contrib.auth.decorators import login_required
 from .models import Project, Message, Client, Professional
 from .forms import ProjectForm, MessageForm
 
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated]
 
+
+class MessageViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
+
+
+""""
 def home(request):
     projects = Project.objects.all()
     messages = Message.objects.filter(recipient=request.user) if request.user.is_authenticated else []
@@ -69,7 +81,7 @@ def message_list(request):
     messages_sent = Message.objects.filter(sender=request.user)
     messages_received = Message.objects.filter(recipient=request.user)
     return render(request, 'hub/message_list.html', {'messages_sent': messages_sent, 'messages_received': messages_received})
-"""def home(request):
+def home(request):
     return render(request, 'buildhubapp/indexxcc.html')
     #projects = Project.objects.all()
     #messages = Message.objects.all()
