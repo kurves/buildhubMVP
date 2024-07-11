@@ -147,8 +147,8 @@ DJOSER = {
     'SEND_CONFIRMATION_EMAIL': True,
 
   'SERIALIZERS': {
-        'user_create': 'buildhub.serializers.UserSerializer',
-        'user': 'buildhub.serializers.UserSerializer',
-        'current_user': 'buildhub.serializers.UserSerializer',
+        'user_create': 'buildhubapp.serializers.UserSerializer',
+        'user': 'buildhubapp.serializers.UserSerializer',
+        'current_user': 'buildhubapp.serializers.UserSerializer',
     },
 }
