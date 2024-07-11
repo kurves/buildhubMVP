@@ -136,8 +136,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-     r'C:\Users\TOM\Desktop\Build hub\BuildHubDjango\static',
+
+    os.path.join(BASE_DIR, "static"),
     ]
 
 # Default primary key field type
